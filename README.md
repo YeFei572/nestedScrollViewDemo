@@ -1,3 +1,3 @@
 ## just show the picture:
 
-[pic](./assets/1.gif)
+![pic](./assets/1.gif)
