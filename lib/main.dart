@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:demo04/prod_custom_sliver.dart';
+import 'package:demo04/title_sliver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -62,6 +64,13 @@ class _MyHomePageState extends State<MyHomePage>
     });
     WidgetsBinding.instance
         .addPostFrameCallback((timeStamp) async => buildAlertDialog(context));
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -163,15 +172,15 @@ class _MyHomePageState extends State<MyHomePage>
     if (result == OkCancelResult.ok && mounted) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('同意更新')));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => const TitleSliver()));
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('稍后更新')));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => const ProdCustomSliver()));
     }
 
     print('-----$result');
-  }
-
-  _onWillPop() {
-    return 1 == 2;
   }
 }
